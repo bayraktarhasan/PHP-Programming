@@ -3,7 +3,7 @@
   <?php
     session_start();
     if(isset($_SESSION['login']) && $_SESSION['login'] == true){
-      header('Location: ./Aufgabensammlung3Logged.php');
+      header('Location: ./Aufgabensammlung6Logged.php');
     }
    ?>
   <head>
@@ -13,6 +13,7 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+
     <?php
     if(empty($_COOKIE["Stil"])) {
        $cookie = "Stil2";
@@ -70,7 +71,7 @@
                                        <div class="help-block text-right"><a href="">Forget the password ?</a></div>
                           </div>
                           <div class="form-group">
-                            <input type="hidden" name="page" value="../Aufgabensammlung/Aufgabensammlung3Logged.php">
+                            <input type="hidden" name="page" value="../Aufgabensammlung/Aufgabensammlung6Logged.php">
                              <button type="submit" class="btn btn-primary btn-block">Sign in</button>
                           </div>
                        </form>
@@ -89,25 +90,36 @@
 
       <div class="jumbotron well text-center">
         <h2>
-          Aufgabensammlung 3
+          Aufgabensammlung 6
         </h2>
+
+        <div class="border">
+          <p class="bold"> Aufgabe 1:</p>
+          <?php
+            include_once ('../PHP/Produkt.php');
+            $artikel = new Produkt('Yoda Actionfigur', '...', '61', 'test');
+            $artikel2 = new Produkt('Mercedes ', '...', '61', 'test');
+            echo $artikel->__toString() . ' ' . $artikel2->__toString();
+          ?>
+        </div>
+
+
       </div>
     </div>
   </div>
 </div>
 </div>
-
 <footer class="footer">
   <div class="container text-center">
     <span class="text-muted">
       © by
       <?php
-          require_once('../PHP/footer.php');
+        require_once('../PHP/footer.php');
      ?>
    </span>
 
    <form class="stilSwitcher pull-right" id="stilSwitcher" action="../StilSwitcher.php" method="get">
-     <input type="hidden" name="page" value="./Aufgabensammlung/Aufgabensammlung3.php">
+     <input type="hidden" name="page" value="./Aufgabensammlung/Aufgabensammlung6.php">
      <input name="switchStil"  value="Stil1" data-toggle="toggle" data-on="Stil 1" data-off="Stil 2" type="checkbox"
      <?php
       if(empty($_COOKIE["Stil"])) {

@@ -93,7 +93,8 @@
     <h2>
       Registrieren
     </h2>
-    <form role="form" action="">
+
+    <form role="form" action="./PHP/RegisterQuery.php">
       <h2>Please Sign Up <small>It's free and always will be.</small></h2>
         <hr class="colorgraph">
         	<div class="row">

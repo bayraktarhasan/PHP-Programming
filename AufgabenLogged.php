@@ -2,8 +2,10 @@
 <php>
   <?php
     session_start();
-    if(isset($_SESSION['login']) && $_SESSION['login'] == true){
-      header('Location: ./Aufgabensammlung3Logged.php');
+    if(isset($_SESSION["login"]) && $_SESSION["login"] == false){
+      session_destroy();
+      header('Location: Aufgaben.php');
+      exit;
     }
    ?>
   <head>
@@ -21,9 +23,9 @@
      }
 
      if ($cookie == 'Stil1') {
-       echo '<link rel="stylesheet" href="../src/css/master.css">';
+       echo '<link rel="stylesheet" href="./src/css/master.css">';
      } else {
-         echo '<link rel="stylesheet" href="../src/css/master2.css">';
+         echo '<link rel="stylesheet" href="./src/css/master2.css">';
      }
     ?>
     <title>Bayraktar Hasan</title>
@@ -41,56 +43,95 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="../home.php">Bayraktar Hasan</a>
+        <a class="navbar-brand" href="home.php">Bayraktar Hasan</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><a href="../home.php">Home</a></li>
-          <li  class="active"><a href="../Aufgaben.php">Aufgaben</a></li>
+          <li><a href="home.php">Home</a></li>
+          <li  class="active"><a href="Aufgaben.php">Aufgaben</a></li>
 
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-          <li><p class="navbar-text">Already have an account?</p></li>
+          <li><p class="navbar-text">
+            <?php
+              echo $_SESSION['uname'];
+            ?>
+          </p></li>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
-            <ul id="login-dp" class="dropdown-menu">
-              <li>
-                 <div class="row">
-                    <div class="col-md-12 text-center">
-                      Login
-                       <form class="form" role="form" method="POST" action="../PHP/Login.php">
-                          <div class="form-group">
-                             <input type="text" class="form-control" name="uname" placeholder="Email address" required>
-                          </div>
-                          <div class="form-group">
-                             <input type="password" class="form-control" name="upwd" placeholder="Password" required>
-                                       <div class="help-block text-right"><a href="">Forget the password ?</a></div>
-                          </div>
-                          <div class="form-group">
-                            <input type="hidden" name="page" value="../Aufgabensammlung/Aufgabensammlung3Logged.php">
-                             <button type="submit" class="btn btn-primary btn-block">Sign in</button>
-                          </div>
-                       </form>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Logout</b> <span class="caret"></span></a>
+        <ul id="login-dp" class="dropdown-menu">
+          <li>
+             <div class="row">
+                <div class="col-md-12 text-center">
+                  Logout
+                  <form class="form" role="form" method="post" action="PHP/Logout.php" accept-charset="UTF-8" id="login-nav">
+                    <div class="form-group">
+                      <input type="hidden" name="page" value="../Aufgaben.php">
+                      <button type="submit" class="btn btn-primary btn-block">Logout</button>
                     </div>
-                    <div class="bottom text-center">
-                      New here ? <a href="Register.php"><b>Join Us</b></a>
-                    </div>
-                 </div>
-              </li>
-            </ul>
-              </li>
-            </ul>
+                  </form>
+                </div>
+             </div>
+          </li>
+        </ul>
+          </li>
+        </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
 
       <div class="jumbotron well text-center">
         <h2>
-          Aufgabensammlung 3
+          Aufgabensammlung
         </h2>
+        <p>
+          <a href="./Aufgabensammlung/Aufgabensammlung1.php">
+          Aufgabensammlung 1
+          </a>
+        </p>
+
+        <p>
+          <a href="./Aufgabensammlung/Aufgabensammlung2.php">
+          Aufgabensammlung 2
+          </a>
+        </p>
+
+        <p>
+          <a href="./Aufgabensammlung/Aufgabensammlung3.php">
+          Aufgabensammlung 3
+          </a>
+        </p>
+
+        <p>
+          <a href="./Aufgabensammlung/Aufgabensammlung4.php">
+          Aufgabensammlung 4
+          </a>
+        </p>
+
+        <p>
+          <a href="./Aufgabensammlung/Aufgabensammlung5.php">
+          Aufgabensammlung 5
+          </a>
+        </p>
+
+        <p>
+          <a href="./Aufgabensammlung/Aufgabensammlung6.php">
+          Aufgabensammlung 6
+          </a>
+        </p>
+
+        <p>
+          <?php
+          if(isset($_SESSION["login"]) && $_SESSION["login"] == true){
+            echo '<a href="./Aufgabensammlung/Geheim.php">
+                  Geheim
+                  </a>';
+          }
+           ?>
+        </p>
       </div>
     </div>
   </div>
@@ -102,12 +143,12 @@
     <span class="text-muted">
       © by
       <?php
-          require_once('../PHP/footer.php');
+          require_once('./PHP/footer.php');
      ?>
    </span>
 
-   <form class="stilSwitcher pull-right" id="stilSwitcher" action="../StilSwitcher.php" method="get">
-     <input type="hidden" name="page" value="./Aufgabensammlung/Aufgabensammlung3.php">
+   <form class="stilSwitcher pull-right" id="stilSwitcher" action="StilSwitcher.php" method="get">
+     <input type="hidden" name="page" value="Aufgaben.php">
      <input name="switchStil"  value="Stil1" data-toggle="toggle" data-on="Stil 1" data-off="Stil 2" type="checkbox"
      <?php
       if(empty($_COOKIE["Stil"])) {
@@ -128,6 +169,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-  <script type="text/javascript" src="../src/js/stilSwitch.js"></script>
+  <script type="text/javascript" src="./src/js/stilSwitch.js"></script>
   </body>
 </php>

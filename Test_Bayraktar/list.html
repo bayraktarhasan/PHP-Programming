@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+   
+<head>
+<title>NL-Anmeldungen</title>
+
+<!--CSS für die Newsletter Anmeldung-->
+<style>
+    
+body{
+	font-family:sans-serif;
+	font-size:0.8em;
+	background-color:aliceblue;
+}
+    
+#inhalt{
+	position: absolute;
+	top:50%;
+	left:50%;
+        overflow: auto;
+        
+	margin-left:-200px;
+	margin-top:-165px;	
+	border-radius:20px;
+	width:400px;
+	height:280px;
+	/*margin:auto;*/
+	padding:20px;
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e4f5fc+0,bfe8f9+50,9fd8ef+51,2ab0ed+100;Blue+Gloss+%235 */
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#a9e4f7+0,0fb4e7+100;Ble+3D+%235 */
+	background: rgb(169,228,247); /* Old browsers */
+	background: -moz-linear-gradient(top, rgba(169,228,247,1) 0%, rgba(15,180,231,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(169,228,247,1)), color-stop(100%,rgba(15,180,231,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, rgba(169,228,247,1) 0%,rgba(15,180,231,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(169,228,247,1) 0%,rgba(15,180,231,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, rgba(169,228,247,1) 0%,rgba(15,180,231,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom, rgba(169,228,247,1) 0%,rgba(15,180,231,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a9e4f7', endColorstr='#0fb4e7',GradientType=0 ); /* IE6-9 */
+	background-repeat:no-repeat;
+	-webkit-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+	box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 0.75);	
+}
+
+label{
+	width:150px;
+	
+	float:left;
+	/*padding:5px;*/
+	/*text-align:left;*/
+	/*display:block;*/
+}
+
+ol li {
+	list-style:none;
+	margin:10px;
+	/*display:block;*/
+}
+
+input {
+	/*display:block;*/
+	clear: left;
+	width:150px;
+	transition: all 1.5s;	
+}
+
+.warning {
+    border: 2px solid red;
+    
+}
+
+/*:required{
+	border:2px solid tomato;
+}*/
+
+#submit_button{
+	width:157px;
+	height:30px;
+	margin-top:10px;
+	margin-left:150px;	
+			
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#feccb1+0,f17432+50,ea5507+51,fb955e+100;Red+Gloss+%232 */
+	background: #feccb1; /* Old browsers */
+	background: -moz-linear-gradient(top, tomato 0%, #f17432 50%, #ea5507 51%, #fb955e 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#feccb1), color-stop(50%,#f17432), color-stop(51%,#ea5507), color-stop(100%,#fb955e)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, tomato 0%,#f17432 50%,#ea5507 51%,#fb955e 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, tomato 0%,#f17432 50%,#ea5507 51%,#fb955e 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, tomato 0%,#f17432 50%,#ea5507 51%,#fb955e 100%); /* IE10+ */
+	background: linear-gradient(to bottom, tomato 0%,#f17432 50%,#ea5507 51%,#fb955e 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='tomato', endColorstr='#fb955e',GradientType=0 ); /* IE6-9 */
+	/*-webkit-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+	box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 0.75);*/
+}
+
+
+#gast{
+	width:130px;
+	border:none;
+}
+
+h1{
+	width:100%;
+	text-align:center;
+}
+
+
+
+</style>
+</head>
+
+	
+ 
+<body>
+    <div id="inhalt">
+        <h1>Newsletter-Anmeldungen</h1>
+        <button id="submit_button">Get the List</button>
+    </div>
+    
+    <script>
+        
+        var buttonEl = document.getElementById("submit_button");
+        buttonEl.onclick = getNewFact;
+      
+        function getNewFact(){
+            //alert("HJi");
+            var request = new XMLHttpRequest();
+          
+            
+            request.onreadystatechange = function()
+            {
+                if (request.readyState == 4)
+                {
+                    var response = JSON.parse(request.responseText);
+                    //var cats=JSON.parse(response);
+                    
+                    //alert(response);
+                    var inhaltEl = document.getElementById("inhalt");
+                    
+                    for(var person in response)
+                    {
+                        //alert(response[person]["vorname"]);
+                         var newPEl = document.createElement("p");
+                         newPEl.innerHTML = response[person]["vorname"] + " " + response[person]["nachname"] + '(' + response[person]["email"] + ')';
+                         inhaltEl.appendChild(newPEl);
+                    }
+                    
+                   
+                       
+                    
+                }
+                    
+            };
+          
+            request.open('GET', 'server/nlliste.json', true);
+            request.send();
+            
+            
+        };
+        
+       
+        
+        
+    </script>
+    
+</body>
+</html>

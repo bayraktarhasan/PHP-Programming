@@ -2,8 +2,10 @@
 <php>
   <?php
     session_start();
-    if(isset($_SESSION['login']) && $_SESSION['login'] == true){
-      header('Location: ./homeLogged.php');
+    if(isset($_SESSION["login"]) && $_SESSION["login"] == false){
+      session_destroy();
+      header('Location: home.php');
+      exit;
     }
    ?>
   <head>
@@ -54,30 +56,24 @@ if(empty($_COOKIE["Stil"])) {
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-          <li><p class="navbar-text">Already have an account?</p></li>
+          <li><p class="navbar-text">
+            <?php
+              echo $_SESSION['uname'];
+            ?>
+          </p></li>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Logout</b> <span class="caret"></span></a>
   			<ul id="login-dp" class="dropdown-menu">
   				<li>
   					 <div class="row">
   							<div class="col-md-12 text-center">
-  								Login
-  								 <form class="form" role="form" method="POST" action="./PHP/Login.php">
-  										<div class="form-group">
-  											 <input type="text" class="form-control" name="uname" placeholder="Username" required>
-  										</div>
-  										<div class="form-group">
-  											 <input type="password" class="form-control" name="upwd" placeholder="Password" required>
-                                   <div class="help-block text-right"><a href="">Forget the password ?</a></div>
-  										</div>
-  										<div class="form-group">
-                        <input type="hidden" name="page" value="../home.php">
-  											 <button type="submit" class="btn btn-primary btn-block">Sign in</button>
-  										</div>
-  								 </form>
-  							</div>
-  							<div class="bottom text-center">
-  								New here ? <a href="Register.php"><b>Join Us</b></a>
+  								Logout
+                  <form class="form" role="form" method="post" action="PHP/Logout.php" accept-charset="UTF-8" id="login-nav">
+                    <div class="form-group">
+                      <input type="hidden" name="page" value="../home.php">
+                       <button type="submit" class="btn btn-primary btn-block">Logout</button>
+                    </div>
+                  </form>
   							</div>
   					 </div>
   				</li>
