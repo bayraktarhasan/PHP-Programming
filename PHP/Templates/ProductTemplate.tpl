@@ -1,8 +1,7 @@
+
 <!DOCTYPE php>
 <php>
-  <?php
-    session_start();
-   ?>
+
   <head>
     <meta charset="utf-8">
     <meta name="author" content="Bayraktar Hasan">
@@ -11,72 +10,42 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 
-    <?php
-    if(empty($_COOKIE["Stil"])) {
-       $cookie = "Stil2";
-     } else {
-       $cookie = $_COOKIE["Stil"];
-     }
+    ##Stil##
 
-     if ($cookie == 'Stil1') {
-       echo '<link rel="stylesheet" href="../src/css/master.css">';
-     } else {
-         echo '<link rel="stylesheet" href="../src/css/master2.css">';
-     }
-    ?>
     <title>Bayraktar Hasan</title>
   </head>
   <body>
     <div class="main">
 
-      <?php
-        include('../PHP/Navbars/NavbarSub.php');
-       ?>
-
-  <div class="jumbotron well text-center">
+  <div class="jumbotron well text-center ">
     <h2>
-      Aufgabensammlung 5
+      ##Title##
     </h2>
 
     <div class="border">
-
+      <li class="wrapper">
+        <div class="showartikel">
+          <img class="artikelBilder" src='##Produkt##' alt="Aktuelles Artikel" width="300" height="250">
+          <p class="art">##Produkt_Name##</p>
+          <p>
+            ##Produkt_Beschreibung##
+          </p>
+        </div>
+      </li>
     </div>
-
-      <?php
-      include('../PHP/GetProducts.php');
-       ?>
-
 
   </div>
     </div>
   </div>
 </div>
 </div>
+
 <footer class="footer">
   <div class="container text-center">
     <span class="text-muted">
-      © by
-      <?php
-        require_once('../PHP/footer.php');
-     ?>
+      © by ##Footer##
    </span>
 
-   <form class="stilSwitcher pull-right" id="stilSwitcher" action="../StilSwitcher.php" method="get">
-     <input type="hidden" name="page" value="./Aufgabensammlung/Aufgabensammlung5.php">
-     <input name="switchStil"  value="Stil1" data-toggle="toggle" data-on="Stil 1" data-off="Stil 2" type="checkbox"
-     <?php
-      if(empty($_COOKIE["Stil"])) {
-         $cookie = "Stil2";
-       } else {
-         $cookie = $_COOKIE["Stil"];
-       }
-       if ($cookie == 'Stil1') {
-         echo 'checked';
-       } else {
-         echo '';
-       }
-    ?>>
-   </form>
    </div>
 </footer>
 

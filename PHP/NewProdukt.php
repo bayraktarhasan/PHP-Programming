@@ -1,6 +1,8 @@
 <?php
   if(isset($_POST["ProduktName"]) && isset($_POST["btn-upload"])){
     $pName = filter_input(INPUT_POST, 'ProduktName', FILTER_SANITIZE_STRING);
+    $pBeschreibung = filter_input(INPUT_POST, 'textarea', FILTER_SANITIZE_STRING);
+
 
     $host = 'localhost';
     $user = 'root';
@@ -9,6 +11,7 @@
 
     if($mysqli = new mysqli($host, $user, $password, $database)){
       $pName = $mysqli->real_escape_string($pName);
+      $pBeschreibung = $mysqli->real_escape_string($pBeschreibung);
 
       $basename = $_FILES['file']['name'];
 
@@ -19,11 +22,11 @@
       $file = basename($_FILES["file"]["name"]);
 
       $location = "../Uploaded_Files/" . $file;
-      $query = "INSERT INTO produkt(pName, FileName, Location) VALUES ('$pName', '$file', '$location')";
+      $query = "INSERT INTO produkt(pName, pBeschreibung,  FileName, Location) VALUES ('$pName', '$pBeschreibung', '$file', '$location')";
       $mysqli->query($query);
 
       if($mysqli->errno == 0) {
-        header('Location: ../Aufgabensammlung/Aufgabensammlung5Logged.php');
+        header('Location: ../Aufgabensammlung/Aufgabensammlung6.php');
       } else {
         echo 'Fehler';
       }

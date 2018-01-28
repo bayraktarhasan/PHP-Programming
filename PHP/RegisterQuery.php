@@ -1,40 +1,41 @@
 <?php
   session_start();
-  $_SESSION['login'] = true;
-  $_SESSION['uname'] = 'haso';
+  $_SESSION['login'] = false;
+  $_SESSION['uname'] = '';
 
-  if(!empty($_SESSION['login']) && !empty($_SESSION['uname'])){
-  $vorname = filter_input(INPUT_GET, 'first_name', FILTER_SANITIZE_STRING);
-  $nachname = filter_input(INPUT_GET, 'last_name', FILTER_SANITIZE_STRING);
-  $displayname = filter_input(INPUT_GET, 'display_name', FILTER_SANITIZE_STRING);
-  $email = filter_input(INPUT_GET, 'email', FILTER_SANITIZE_STRING);
-
-  $host = 'localhost';
-  $user = 'root';
-  $password = 'haso';
-  $database = 'webpage';
-
-  if($mysqli = new mysqli($host, $user, $password, $database))
+  if (!empty($_POST["display_name"]) && !empty($_POST["password"]))
   {
-    $vorname = $mysqli->real_escape_string($vorname);
-    $nachname = $mysqli->real_escape_string($nachname);
-    $displayname = $mysqli->real_escape_string($displayname);
-    $email = $mysqli->real_escape_string($email);
 
-    $query = "INSERT INTO nlreg(nl_vorname, nl_nachname, nl_email, nl_displayname)"
-      . "VALUES ('$vorname','$nachname','$email','$displayname')";
+    $displayname = filter_input(INPUT_POST, 'display_name', FILTER_SANITIZE_STRING);
+    $passwordUser = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 
-      $mysqli->query($query);
+    $host = 'localhost';
+    $user = 'root';
+    $password = 'haso';
+    $database = 'webpage';
 
-      if($mysqli->errno == 0) {
-        header('Location: RegisterSuccess.php');
-        exit;
-      } else if ($mysqli->errno == 1062) {
-        echo 'Die E-Mail Adresse existiert schon. Bitte versuchen Sie eine andere E-Mail Adresse';
-      } else {
-        echo 'Datenbank-Fehler' . $mysqli->error;
-      }
-  }
+    if($mysqli = new mysqli($host, $user, $password, $database))
+    {
+      $displayname = $mysqli->real_escape_string($displayname);
+      $passwordUser = $mysqli->real_escape_string($passwordUser);
+
+      $query = "INSERT INTO user(uname, upw)"
+        . "VALUES ('$displayname','$passwordUser')";
+
+        $mysqli->query($query);
+
+        if($mysqli->errno == 0) {
+          header('Location: ../home.php');
+          exit;
+        } else if ($mysqli->errno == 1062) {
+          echo 'Die E-Mail Adresse existiert schon. Bitte versuchen Sie eine andere E-Mail Adresse';
+        } else {
+          echo 'Datenbank-Fehler' . $mysqli->error;
+        }
+    }
+} else{
+    $_SESSION['errorReg'] = 'Registrierung fehlgeschlagen! Bitte Formular vollständig ausfüllen.';
+    header('Location: register.php');
 }
 
 ?>

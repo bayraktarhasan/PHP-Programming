@@ -2,9 +2,6 @@
 <php>
   <?php
     session_start();
-    if(isset($_SESSION['login']) && $_SESSION['login'] == true){
-      header('Location: ./Aufgabensammlung4Logged.php');
-    }
    ?>
   <head>
     <meta charset="utf-8">
@@ -31,66 +28,17 @@
   <body>
     <div class="main">
 
-    <nav class="navbar navbar-default navbar-inverse" role="navigation">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="../home.php">Bayraktar Hasan</a>
-      </div>
-
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li><a href="../home.php">Home</a></li>
-          <li  class="active"><a href="../Aufgaben.php">Aufgaben</a></li>
-
-        </ul>
-
-        <ul class="nav navbar-nav navbar-right">
-          <li><p class="navbar-text">Already have an account?</p></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
-            <ul id="login-dp" class="dropdown-menu">
-              <li>
-                 <div class="row">
-                    <div class="col-md-12 text-center">
-                      Login
-                       <form class="form" role="form" method="POST" action="../PHP/Login.php">
-                          <div class="form-group">
-                             <input type="text" class="form-control" name="uname" placeholder="Email address" required>
-                          </div>
-                          <div class="form-group">
-                             <input type="password" class="form-control" name="upwd" placeholder="Password" required>
-                                       <div class="help-block text-right"><a href="">Forget the password ?</a></div>
-                          </div>
-                          <div class="form-group">
-                            <input type="hidden" name="page" value="../Aufgabensammlung/Aufgabensammlung4Logged.php">
-                             <button type="submit" class="btn btn-primary btn-block">Sign in</button>
-                          </div>
-                       </form>
-                    </div>
-                    <div class="bottom text-center">
-                      New here ? <a href="Register.php"><b>Join Us</b></a>
-                    </div>
-                 </div>
-              </li>
-            </ul>
-              </li>
-            </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
+      <?php
+        include('../PHP/Navbars/NavbarSub.php');
+       ?>
 
       <div class="jumbotron well text-center">
         <h2>
           Aufgabensammlung 4
         </h2>
+        <p>
+          Sie können die Aufgaben von dieser Aufgabensammlung von der Seite entnehmen.
+        </p>
       </div>
     </div>
   </div>

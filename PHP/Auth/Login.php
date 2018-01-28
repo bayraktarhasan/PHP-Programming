@@ -15,12 +15,14 @@
     if($mysqli = new mysqli($host, $user, $password, $database))
     {
       $uname = $mysqli->real_escape_string($uname);
+      $upw = $mysqli->real_escape_string($upw);
       $query = "SELECT * FROM user WHERE uname = '$uname' AND upw = '$upw'";
       $mysqli->query($query);
 
       if($mysqli->errno == 0) {
         if($mysqli->affected_rows == 1){
           $_SESSION['uname'] =htmlspecialchars($uname);
+          $_SESSION['upass'] = htmlspecialchars($upw);
           $_SESSION['login'] = true;
           $_SESSION['']= '';
           header('Location: '.$page);

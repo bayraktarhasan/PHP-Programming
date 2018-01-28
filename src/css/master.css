@@ -12,6 +12,30 @@ body{
   padding: 15px;
 }
 
+.navbar-default  {
+  background-color: #ffffff;
+}
+
+.navbar-inverse  {
+  background-color: #ffffff;
+}
+
+.navbar  {
+  background-color: #ffffff;
+}
+
+
+.art {
+  background-color: #b2b5b5;
+  position: block;
+  color: #ffffff;
+}
+
+.artikelBilder {
+  border: 2px solid black;
+}
+
+
 .footer {
   position: absolute;
   bottom: 0;
@@ -33,9 +57,11 @@ body{
   text-decoration: underline;
 }
 
-.stilSwitcher {
-  margin-top: 12px;
+.wrapper {
+  display: inline-block;
+  margin: 10px;
 }
+
 
 
 

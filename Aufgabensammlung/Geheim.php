@@ -2,10 +2,6 @@
 <php>
   <?php
     session_start();
-    if(isset($_SESSION['login']) && $_SESSION['login'] == false){
-      session_destroy();
-      header('Location: ./Aufgabensammlung6Logged.php');
-    }
 
     require_once('../PHP/Logger.php');
     require_once('../PHP/Produkt.php');
@@ -36,55 +32,9 @@
   <body>
     <div class="main">
 
-    <nav class="navbar navbar-default navbar-inverse" role="navigation">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="../home.php">Bayraktar Hasan</a>
-      </div>
-
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li><a href="../home.php">Home</a></li>
-          <li  class="active"><a href="../Aufgaben.php">Aufgaben</a></li>
-
-        </ul>
-
-        <ul class="nav navbar-nav navbar-right">
-          <li><p class="navbar-text">
-            <?php
-              echo $_SESSION['uname'];
-            ?>
-          </p></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Logout</b> <span class="caret"></span></a>
-            <ul id="login-dp" class="dropdown-menu">
-              <li>
-                 <div class="row">
-                    <div class="col-md-12 text-center">
-                      Logout
-                      <form class="form" role="form" method="post" action="../PHP/Logout.php" accept-charset="UTF-8" id="login-nav">
-                        <input type="hidden" name="page" value="../Aufgaben.php">
-                        <div class="form-group">
-                           <button type="submit" class="btn btn-primary btn-block">Logout</button>
-                        </div>
-                      </form>
-                    </div>
-                 </div>
-              </li>
-            </ul>
-              </li>
-            </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
+      <?php
+        include('../PHP/NavbarSub.php');
+       ?>
 
       <div class="jumbotron well text-center">
         <h2>
@@ -95,7 +45,8 @@
           <p class="bold"> Deine Geheimenn Daten:</p>
 
           <?php
-            echo 'Username: ' .  $_SESSION['uname'];
+            echo '<p> Username: ' . $_SESSION['uname'] .'</p>';
+            echo '<p> Password: ' . $_SESSION['upass'] .'</p>';
            ?>
 
         </div>
